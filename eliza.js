@@ -1,5 +1,5 @@
 /**
- * Ryan Baker
+ * Ryan Baker & Alexander Briggs
  * Arizona State University
  * SER421 Fall B 2016
  * Lab 2
@@ -32,9 +32,12 @@ var slowPrompts = [
 //set coffee timer
 setCoffeeInterval();
 
+//Read in initial dictionary file.
+var elizadict = JSON.parse(fs.readFileSync('elizadict.json', 'utf8'));
+
 //initial startup
 say("What's your name?");
-setQuestionInterval();
+//setQuestionInterval();
 
 //continuous talking
 rl.on('line', function (line) {
@@ -72,16 +75,38 @@ function getResponse (line, callback) {
     if ('' === name) {
         name = line;
         var i = rand(0, startQuestions.length-1);
-        setQuestionInterval();
+        //setQuestionInterval();
         return callback('Hello '+line+', '+startQuestions[i]);
     }
 
     line = line.replace(/[^a-z ]/g, '');
     var words = line.split(' ');
 
-    //TODO: search for words in our lists and send an appropriate response
+    //search for words the dictionary and send an appropriate response
+    var dictresponse = function(){
+    	for(var i = 0; i < elizadict.length; i++){
+        	var entry = elizadict[i];
+        	for(var j = 0; j < entry.key.length; j++){
+        		var keyword = entry.key[j];
+        		for(var k = 0; k < words.length; k++){
+        			if(words[k] == keyword){
+        				var resp = entry.phrase[rand(0,(entry.phrase.length))];
+        				//Move this keyword to the back of the dictionary.
+        				elizadict.splice( i, 1 );
+        				elizadict.push(entry);
+        				return resp;
+        			}
+        		}
+        	}
+        }
+    	//get a default response, assumes default is first entry.
+    	return(elizadict[0].phrase[rand(0,(entry.phrase.length))]);
+    }
+    
+    
+    return callback(dictresponse());
 
-    return callback('The first word you said was '+words[0]);
+    //return callback('The first word you said was '+words[0]);
 }
 
 //TODO: interval function to check for new files
@@ -135,6 +160,9 @@ function setQuestionInterval () {
 function say (message) {
     log += 'Eliza: '+message+'\nYou: ';
     process.stdout.write('Eliza: '+message+'\nYou: ');
+    if((message.slice(-1)) == '?'){
+    	setQuestionInterval();
+    }
 }
 
 function rand (min, max) {

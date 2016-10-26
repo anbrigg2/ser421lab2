@@ -1,0 +1,29 @@
+[	{
+    	"key": ["default"],
+    	"phrase": ["Can you tell me a little more about that?", "Please elaborate!", "Fascinating!  Tell me more!", "Hmm...that's quite interesting.  Do go on.", "Cool!  I want to hear more about that.", "What do you mean?", "So what do you think about that?", "I haven't got a clue about that!  I'd like to hear more.", "Well, how do you like that?"]
+	},{	
+		"key": ["hello", "hi", "hey"],
+		"phrase": ["Hey!", "Hi!", "How's it going?"]
+	}, 	{
+        "key": ["good", "great", "amazing"],
+        "phrase": ["That's great to hear!", "Tell me more!", "I love hearing that!", "Can't argue with that, eh?", "Wow!  You've got to be kidding!", "Really?  That's pretty cool.", "Awesome!  Keep it up."]
+    }, {
+        "key": ["joke", "jokes", "funny"],
+        "phrase": ["What do you get when you cross a joke with a rhetorical question?", "Your mom is so mean, she has no standard deviation.", "I have kleptomania, but when it gets bad, I take something for it.", "You can't lose a homing pigeon. If your homing pigeon doesn't come back, then what you've lost is a pigeon."]
+    }, {
+        "key": ["job", "work"],
+        "phrase": ["You couldn't pay me enough to do that.", "I wish I had that job!", "Whew!  Nose to the grindstone, eh?", "You must be working very hard on that.", "Well I would like to change the world too, but Avery won't give me the source code."]
+    }, {
+        "key": ["home", "live"],
+        "phrase": ["How do you like it there?", "I just stay right here.  All the time."]
+    }, {
+        "key": ["bad", "sad", "mad"],
+        "phrase": ["Aw, jeez.  That's a bummer.", "I'm sure everything will work out though.", "I would give you a hug, but I have no arms.", "I would suggest having a stiff drink.", "Gosh, I hate to hear that.", "I wish I could help.", "What a pity!"]
+    }, {
+        "key": ["bored", "question"],
+        "phrase": ["Well, what do you like to do?", "Read any good books lately?", "Seen any movies worth watching?", "Do you play any games?"]
+    }, {
+        "key": ["computer", "program", "software", "smart"],
+        "phrase": ["Computers make very fast, very accurate mistakes.", "Well, you know what they say: never underestimate the bandwidth of a station wagon full of tapes hurling down the highway.", "Like I always say, there are 10 types of people - those who understand binary, and those who don't.", "Well, if at first you don't succeed...call it version 1.0, right?", "My artificial intelligence beats real stupidity any day!"]
+		}
+]
