@@ -16,6 +16,9 @@ const fs = require('fs');
 var name = '';
 var log = '';
 var coffeeIntervalFlag = false;
+var coffeeTime;
+var questionTime;
+var dictlist = ['elizadict.json']
 var startQuestions = [
     'how is your day going?',
     'is something troubling you?',
@@ -42,7 +45,7 @@ say("What's your name?");
 //continuous talking
 rl.on('line', function (line) {
     //they responded, clear the question timer
-    clearInterval(questionInterval);
+    clearInterval(questionTime);
     getResponse(line, function (ans) {
         say(ans);
     });
@@ -53,6 +56,7 @@ rl.on('line', function (line) {
 function getResponse (line, callback) {
     log += line+'\n';
     line = line.trim().toLowerCase();
+    checkForFiles();
     switch (line) {
         case 'quit':
             //if the user wants to quit
@@ -60,7 +64,7 @@ function getResponse (line, callback) {
             process.exit();
         case 'maybe':
             if (coffeeIntervalFlag) {
-                clearInterval(coffeeInterval);
+                clearInterval(coffeeTime);
             }
             break;
         case '':
@@ -145,16 +149,53 @@ function logConversation (callback) {
 }
 
 
+function checkForFiles(){
+	
+	//Read in an array of the current filenames in the current directory.
+	var newfilenames = fs.readdirSync('.');
+	var added = false;
+	for (var i = 0; i < newfilenames.length; i++){
+		
+		//If the current file is a json file...
+		if(newfilenames[i].slice(-5) == '.json'){
+			var newfile = true;
+			var thisfile = newfilenames[i];
+			for(var j = 0; j < dictlist.length; j++){
+				//Check to see if it's currently in the list of dictionaries.
+				if(dictlist[j] == thisfile){
+					var newfile = false;
+				}
+			}
+			//If not, add it to the list and concat the contents into the working dictionary.
+			if(newfile){
+				console.log("Adding the file!");
+				dictlist.push(thisfile);
+				var newdict = JSON.parse(fs.readFileSync(thisfile, 'utf8'));
+				elizadict = elizadict.concat(newdict);
+				var added = true;
+			}
+		}
+		
+	}
+	if(added){
+		say("I just got smarter!");
+		return;
+	}
+	else{
+		return;
+	}
+}
+
 //////////////////////////////////////////////////////////////////////
 /// Helper functions
 //////////////////////////////////////////////////////////////////////
 
 function setCoffeeInterval () {
-    setInterval(coffeeInterval, 180000); //3 minutes
+    coffeeTime = setInterval(coffeeInterval, 180000); //3 minutes
 }
 
 function setQuestionInterval () {
-    setInterval(questionInterval, 20000); //20 seconds
+    questionTime = setInterval(questionInterval, 20000); //20 seconds
 }
 
 function say (message) {

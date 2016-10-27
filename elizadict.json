@@ -25,5 +25,8 @@
     }, {
         "key": ["computer", "program", "software", "smart"],
         "phrase": ["Computers make very fast, very accurate mistakes.", "Well, you know what they say: never underestimate the bandwidth of a station wagon full of tapes hurling down the highway.", "Like I always say, there are 10 types of people - those who understand binary, and those who don't.", "Well, if at first you don't succeed...call it version 1.0, right?", "My artificial intelligence beats real stupidity any day!"]
-		}
+	},{
+		"key": ["sorry", "apologize"],
+		"phrase": ["It's okay!", "You don't need to apologize to me!", "I guess I can forgive you.", "How will you make it up to me?"]
+	}
 ]
